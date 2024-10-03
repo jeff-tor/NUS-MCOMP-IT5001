@@ -1,9 +1,5 @@
 import random
 
-def random_around_zero(r):
-    square_width = 2 * r
-    return random.random() * square_width - r
-
 def in_circle(r, x, y):
     distance_from_center = (x * x + y * y) ** 0.5
     return distance_from_center <= r
