@@ -9,7 +9,6 @@ def filter_wave(wave,times):
         elif wave.index(i) == len(wave):
             new_wave[i] = int(wave[i-1] * 0.2 + wave[i] * 0.6 + 0)
         else:
-
             new_wave[i] = int(wave[i-1] * 0.2 + wave[i] * 0.6 + wave[i+1] * 0.2)
 
     # for i in range(len(new_wave)):
@@ -19,7 +18,7 @@ def filter_wave(wave,times):
 
 
 resistor_list = (75,80,90,77,88,91,60,74,73,70,55,93,59),150,[(59, 91), (60, 90), (70, 80), (73, 77)]
-resistor_list_2 = (23,75,80,90,77,88,91,60,1,74,73,4,70,55,7,9,93,59,12,43),170,[(77, 93), (80, 90)]
+resistor_list_2 = (23,59,7,75,80,90,77,88,91,60,1,74,73,4,70,55,7,9,93,59,12,43),170,[(77, 93), (80, 90), (59, 7)]
 
 def flatten(xs):
     for x in xs:
@@ -27,23 +26,36 @@ def flatten(xs):
             yield from flatten(x)
         except:
             yield x
-
-res = list(flatten(resistor_list_2))
-
-print(sorted(res))
-
 def matchResistors(R, n):
+    flatten_list = sorted(flatten(R))
+    d = {}
+    matched_pairs = []
+    for index, number in enumerate(flatten_list):
+        complement = int(n - number)
+        if complement in d.values():
+            id = list(d.values()).index(complement)
+            if d.get(id) == None:
+                matched_pairs.append((number, d.get((id+1))))
+                d.pop(id+1)
+            else:
+                matched_pairs.append((number, d.get(id)))
+                d.pop(id)
+        else:
+            d[index] = number
+    return matched_pairs
 
-    hash_table = {}
-    matches_pairs = []
-    for number in hash_table:
-        complement = n - number
-    if complement in hash_table:
-        matches_pairs.append((number, hash_table[seen[complement]]))
-    else:
-        hash_table[number] = hash_table.index(number)
 
-    return matches_pairs
+def matchResistors_v2(R, n):
+    flatten_list = sorted(flatten(R))
+    d = []
+    matched_pairs = []
+    for number in flatten_list:
+        complement = int(n - number)
+        if complement in d:
+            matched_pairs.append((number, d[d.index(complement)]))
+            del d[d.index(complement)]
+        else:
+            d.append(number)
+    return matched_pairs
 
-x = matchResistors(resistor_list_2, 90)
-print(x)
+print(matchResistors(resistor_list_2, 66))
