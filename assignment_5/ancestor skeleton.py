@@ -7,7 +7,7 @@ parent = {'Amy':'Ben', 'May':'Tom', 'Tom':'Ben',
 def is_ancestor(name1,name2,parent): # check if name1 is an ancestor of name2
     return 
 
-def is_related(name1,name2,parent):
+def Ttis_related(name1,name2,parent):
     return
 
 print("Is Mary an ancestor of Simon?")
@@ -31,3 +31,4 @@ print("After Philip became Ben\'s parent...")
 print("Is Amy is_related to Philip?")
 print(is_related('Amy','Philip',parent))
 '''
+map()
