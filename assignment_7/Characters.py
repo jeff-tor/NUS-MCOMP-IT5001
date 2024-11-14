@@ -36,7 +36,11 @@ class Character(object):
             dprint(self.name +
                    f' hurt with remaining hp {self.hp}.')
 
-    
+    def gotRev(self):
+        self.alive = True
+        self.hp = self.maxhp // 2
+        dprint(f'Reviving member {self.name} with hp {self.hp}.')
+
 
 class Fighter(Character):
     def __init__(self):
@@ -80,15 +84,16 @@ class Mage(Character):
     ## create more classes in here
 
 class Berserker(Fighter):
-    def __init__(self)
+    def __init__(self):
         super().__init__()
         self.name = 'Berserker'
         self.cost = 200
 
     def act(self,myTeam,enemy):
         if self.hp <= (self.maxhp//2):
-            self.str = 200
+            self.str *= 2
             dprint('Berserk mode! Attack double!')
+            super().act(myTeam,enemy)
         else:
             self.str = 100
             super().act(myTeam,enemy)
@@ -99,8 +104,18 @@ class ArchMage(Mage):
         self.name = 'ArchMage'
         self.cost = 600
 
-    def kaboom(self):
-        if not allAlive():
+    def cast(self,myTeam,enemy):
+        if allDead(myTeam):
+            self.int *= 2
+            for i in enemy:
+                if allAlive(i):
+                    dprint(f'Cast KABOOOOOOM ! (Damage {self.int}) to every enemy!')
+                    enemy[i].gotHurt(self.int)
+        else:
+            super().cast(myTeam,enemy)
+
+    def act(self,myTeam,enemy):
+        super().act(myTeam,enemy)
 
 class Necromancer(Mage):
     def __init__(self):
@@ -108,11 +123,11 @@ class Necromancer(Mage):
         self.name = 'Necromancer'
         self.cost = 400
 
-    def raise_dead(self):
-        dead_member = randDeath()
-        if dead_member:
-            #raise the person to alive
+    def cast(self, myTeam, enemy):
+        if not allAlive(myTeam):
+            self.mana -= manaCost
+            target = randDeath(myTeam)
+            myTeam[target].gotRev()
 
-        pass
-
-
+    def act(self,myTeam,enemy):
+        super().act(myTeam,enemy)

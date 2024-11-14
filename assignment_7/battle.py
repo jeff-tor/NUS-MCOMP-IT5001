@@ -4,8 +4,8 @@ from Team import *
 
 
 # You increase nCharType one at a time 
-nCharType = 2 # no. of types of characters you can choose
-gold = 200    # Gold for you to recruit characters
+nCharType = 5 # no. of types of characters you can choose
+gold = 600    # Gold for you to recruit characters
 minCost = 100 # A hack for userChooseTeam()
 
 '''
@@ -28,12 +28,10 @@ def createChar(i):
 # You should uncomment the following to test one by one
     elif i == 3:
         return Berserker()
-'''
     elif i == 4:
         return ArchMage()
     elif i == 5:
         return Necromancer()
-'''
 
 
 def createRandTeam(gold):
@@ -59,8 +57,8 @@ def userChooseTeam(gold):
             print(f"2: Mage (cost: {Mage().cost})")
 # You should uncomment the following to test one by one            
             print(f"3: Berserker (cost: {Berserker().cost})")
-#            print(f"4: ArchMage (cost: {ArchMage().cost})")
-#            print(f"5: Necromancer (cost: {Necromancer().cost})")
+            print(f"4: ArchMage (cost: {ArchMage().cost})")
+            print(f"5: Necromancer (cost: {Necromancer().cost})")
             choice = int(input(f'Input a choice from 1 to {nCharType}:'))
             if choice < 1 or choice > nCharType:
                 print(f"Your choice {choice} is not valid. Please choose again")
@@ -111,7 +109,7 @@ def runBattle(teamA,teamB, pause = True):
             input("Press Enter to continue....")
         
     if allDead(teamB):
-        dprint("Frist team won!")
+        dprint("First team won!")
         return 0
     else:
         dprint("Second team won!")
@@ -124,7 +122,7 @@ def gameStart(gold,pause = True):
     printStat(enemy)
     myTeam = userChooseTeam(gold)
     if runBattle(myTeam,enemy,pause) == 0:
-        print("Congraz! You won!")
+        print("Congratz! You won!")
     else:
         print("Sorry, you lose")
 
