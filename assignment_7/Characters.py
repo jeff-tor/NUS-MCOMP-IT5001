@@ -85,7 +85,7 @@ class Berserker(Fighter):
         self.name = 'Berserker'
         self.cost = 200
 
-    def act(self):
+    def act(self,myTeam,enemy):
         if self.hp <= (self.maxhp//2):
             self.str = 200
             dprint('Berserk mode! Attack double!')
@@ -102,8 +102,17 @@ class ArchMage(Mage):
     def kaboom(self):
         if not allAlive():
 
+class Necromancer(Mage):
+    def __init__(self):
+        super().__init__()
+        self.name = 'Necromancer'
+        self.cost = 400
+
+    def raise_dead(self):
+        dead_member = randDeath()
+        if dead_member:
+            #raise the person to alive
+
+        pass
 
 
-    # class Necromancer(Mage):
-    #     def __init__(self):
-    #     pass

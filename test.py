@@ -1,28 +1,8 @@
-# def seqScaleI(seq, R):
-#     return list(i * n for i in output)
-
-def sample_test():
-    sample = [1,2,3,4,5]
-
-    result = map((i * 2 for i in sample), sample)
-    print(result)
-
-    return sum(result)
+def recursive(num):
+    if len(str(num)) == 1:
+        return num
+    if (str(num))[0] != '0':
+        return recursive(int(str(num)[0])) * recursive(int(str(num)[1:]))
 
 
-def return_sum(seq):
-    ls = []
-    for i in seq:
-        ls.append(i)
-
-    return sum(map(lambda x: int(x)x**2, list(str(seq))))
-
-print(return_sum(22222))
-
-
-    any(col_name != 'COMPLETED' for i in payout_list)
-
-
-def seqScaleR():
-
-    pass
+print(recursive(2**200-1))
