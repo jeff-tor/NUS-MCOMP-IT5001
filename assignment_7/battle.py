@@ -5,7 +5,7 @@ from Team import *
 
 # You increase nCharType one at a time 
 nCharType = 5 # no. of types of characters you can choose
-gold = 600    # Gold for you to recruit characters
+gold = 800    # Gold for you to recruit characters
 minCost = 100 # A hack for userChooseTeam()
 
 '''

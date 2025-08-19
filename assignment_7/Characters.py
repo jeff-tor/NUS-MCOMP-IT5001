@@ -115,7 +115,11 @@ class ArchMage(Mage):
             super().cast(myTeam,enemy)
 
     def act(self,myTeam,enemy):
-        super().act(myTeam,enemy)
+        if self.mana < manaCost:
+            self.mana += manaRecovery
+            dprint(f'Mana recover to {self.mana}.')
+        else:
+            self.cast(myTeam,enemy)
 
 class Necromancer(Mage):
     def __init__(self):
@@ -130,4 +134,8 @@ class Necromancer(Mage):
             myTeam[target].gotRev()
 
     def act(self,myTeam,enemy):
-        super().act(myTeam,enemy)
+        if self.mana < manaCost:
+            self.mana += manaRecovery
+            dprint(f'Mana recover to {self.mana}.')
+        else:
+            self.cast(myTeam,enemy)
