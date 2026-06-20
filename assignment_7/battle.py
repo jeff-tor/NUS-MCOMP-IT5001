@@ -5,7 +5,7 @@ from Team import *
 
 # You increase nCharType one at a time 
 nCharType = 5 # no. of types of characters you can choose
-gold = 600    # Gold for you to recruit characters
+gold = 1200    # Gold for you to recruit characters
 minCost = 100 # A hack for userChooseTeam()
 
 '''
@@ -55,7 +55,7 @@ def userChooseTeam(gold):
             print("Choices:")
             print(f"1: Fighter (cost: {Fighter().cost})")
             print(f"2: Mage (cost: {Mage().cost})")
-# You should uncomment the following to test one by one            
+# You should uncomment the following to test one by one           iiiii
             print(f"3: Berserker (cost: {Berserker().cost})")
             print(f"4: ArchMage (cost: {ArchMage().cost})")
             print(f"5: Necromancer (cost: {Necromancer().cost})")
@@ -67,6 +67,7 @@ def userChooseTeam(gold):
             if gold >= tempChar.cost:
                 gold -= tempChar.cost
                 team.append(tempChar)         
+    print(team)
     return team
 
 def runBattle(teamA,teamB, pause = True):

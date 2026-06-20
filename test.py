@@ -5,4 +5,4 @@ def recursive(num):
         return recursive(int(str(num)[0])) * recursive(int(str(num)[1:]))
 
 
-print(recursive(2**200-1))
+print(recursive(2**100-1))
